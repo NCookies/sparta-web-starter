@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
     <title>나만의 추억앨범</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -148,7 +150,7 @@
         }
 
         // 미세먼지 정보 가져오기
-        let url = "http://spartacodingclub.shop/sparta_api/seoulair";
+        let url = "https://cors-anywhere.herokuapp.com/http://spartacodingclub.shop/sparta_api/seoulair";
         fetch(url).then(res => res.json()).then(data => {
             let mise = data['RealtimeCityAir']['row'][0]['IDEX_NM'];
             $('#msg').text(mise);
