@@ -36,7 +36,9 @@ jobs:
       - name: Create Firebase Config
         run: |
           mkdir -p config  # 디렉터리 없으면 생성
+          echo "현재 디렉터리"
           ls -al
+          echo "config 생성"
           echo `const firebaseConfig = {
             apiKey: '${{ secrets.FIREBASE_API_KEY }}',
             authDomain: '${{ secrets.FIREBASE_AUTH_DOMAIN }}',
@@ -46,7 +48,11 @@ jobs:
             appId: '${{ secrets.FIREBASE_APP_ID }}',
             measurementId: '${{ secrets.FIREBASE_MEASUREMENT_ID }}'
           };` > config/firebaseConfig.js
+
+          ehco "현재 디렉터리"
           ls -al config
+
+          echo "config 파일 확인"
           cat config/firebaseConfig.js
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
