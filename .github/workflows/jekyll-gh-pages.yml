@@ -51,11 +51,11 @@ jobs:
             mkdir -p config  # 디렉터리 없으면 생성
             echo "현재 디렉터리"
             ls -al
-            
+
             echo "config 생성"
             echo "cosnt firebaseConfig = {};" > config/firebaseConfig.js
 
-            ehco "현재 디렉터리"
+            echo "현재 디렉터리"
             ls -al config
 
             echo "config 파일 확인"
