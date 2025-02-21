@@ -1,11 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>내일배움캠프 [왕초보] 웹개발 종합반</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        .container {
+            width: 70%;
+            padding-top: 50px;
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 400px;
+            /* 원하는 높이 지정 */
+            object-fit: cover;
+        }
+    </style>
 </head>
+
 <body>
-    <a href="./album/index.html">test</a>
+    <div class="container">
+
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+                <div class="card">
+                    <img src="./public/img/login.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">로그인 페이지</h5>
+                        <button type="button" class="btn btn-outline-primary"
+                            onclick="window.open('./sparta/login.html')">들어가기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="./public/img/album.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">추억 앨범</h5>
+                        <button type="button" class="btn btn-outline-primary"
+                            onclick="window.open('./album/index.html')">들어가기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="./public/img/movie.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">스파르타플릭스</h5>
+                        <button type="button" class="btn btn-outline-primary"
+                            onclick="window.open('./spartaflix/index.html')">들어가기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="./public/img/homework.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">3주차 과제</h5>
+                        <button type="button" class="btn btn-outline-primary"
+                            onclick="window.open('./homework/food_3주차_실습1.html')">들어가기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="./public/img/homework.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">5주차 과제</h5>
+                        <button type="button" class="btn btn-outline-primary"
+                            onclick="window.open('./homework/food_5주차_실습.html')">들어가기</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
 </body>
+
 </html>
