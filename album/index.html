@@ -10,6 +10,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+    <script src="../config/firebaseConfig.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
@@ -74,44 +76,86 @@
         }
     </style>
 
-    <script>
-        // 화면이 로드되면 실행
-        $(document).ready(function () {
-            let url = "http://spartacodingclub.shop/sparta_api/seoulair";
-            fetch(url).then(res => res.json()).then(data => {
-                let mise = data['RealtimeCityAir']['row'][0]['IDEX_NM'];
-                $('#msg').text(mise);
-            })
-        });
+    <script type="module">
+        // Firebase SDK 라이브러리 가져오기
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-        function toggleBox() {
-            $('#posting-box').toggle();
-        }
+        // Firebase 인스턴스 초기화
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-        function makeCard() {
+        $("#btn-posting").click(async function () {
             let image = $('#image').val();
             let title = $('#title').val();
             let content = $('#content').val();
             let date = $('#date').val();
 
-            let temp_html = `
-            <div class="col">
-                <div class="card h-100">
-                    <img src="${image}"
-                        class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">${title}</h5>
-                        <p class="card-text">${content}</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-body-secondary">${date}</small>
+            let doc = {
+                'image': image,
+                'title': title,
+                'content': content,
+                'date': date
+            };
+            await addDoc(collection(db, "albums"), doc);
+
+            // clear input
+            $('#image').val('');
+            $('#title').val('');
+            $('#content').val('');
+            $('#date').val('');
+
+            updateCard();
+        })
+
+        $("#btn-save").click(function () {
+            $('#posting-box').toggle();
+        });
+
+        async function updateCard() {
+            $('#cards').empty();
+
+            let docs = await getDocs(collection(db, "albums"));
+            docs.forEach((doc) => {
+                let row = doc.data();
+
+                let image = row['image'];
+                let title = row['title'];
+                let content = row['content'];
+                let date = row['date'];
+
+                let temp_html = `
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="${image}"
+                            class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${title}</h5>
+                            <p class="card-text">${content}</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-body-secondary">${date}</small>
+                        </div>
                     </div>
                 </div>
-            </div>
-            `;
+                `;
 
-            $('#cards').append(temp_html);
+                $('#cards').append(temp_html);
+            });
+
         }
+
+        // 미세먼지 정보 가져오기
+        let url = "http://spartacodingclub.shop/sparta_api/seoulair";
+        fetch(url).then(res => res.json()).then(data => {
+            let mise = data['RealtimeCityAir']['row'][0]['IDEX_NM'];
+            $('#msg').text(mise);
+        })
+
+        // 카드 초기 생성
+        updateCard();
     </script>
 </head>
 
@@ -119,7 +163,7 @@
     <div class="my-title">
         <h1>나만의 추억앨범</h1>
         <p>현재 서울의 미세먼지 : <span id="msg">좋음</span></p>
-        <button onclick="toggleBox()">추억 저장하기</button>
+        <button id="btn-save">추억 저장하기</button>
     </div>
 
     <div class="my-posting-box" id="posting-box">
@@ -140,7 +184,7 @@
             <label for="floatingInput">앨범 날짜</label>
         </div>
         <div class="my-btn">
-            <button type="button" class="btn btn-dark" onclick="makeCard()">기록하기</button>
+            <button id="btn-posting" type="button" class="btn btn-dark"">기록하기</button>
             <button type="button" class="btn btn-outline-dark">닫기</button>
         </div>
     </div>
