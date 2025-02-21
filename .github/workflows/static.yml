@@ -40,6 +40,7 @@ jobs:
           path: '.'
       - name: Create Firebase Config
         run: |
+          mkdir -p config  # 디렉터리 없으면 생성
           echo ${{ secrets.FIREBASE_CONFIG }} > config/firebaseConfig.js
       - name: Deploy to GitHub Pages
         id: deployment
