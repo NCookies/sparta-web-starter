@@ -35,8 +35,9 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Create Firebase Config
         run: |
+          echo ls -al
           mkdir -p config  # 디렉터리 없으면 생성
-          echo "const firebaseConfig = {};" > /config/firebaseConfig.js
+          echo "const firebaseConfig = {};" > config/firebaseConfig.js
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
