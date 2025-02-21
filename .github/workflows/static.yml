@@ -40,7 +40,7 @@ jobs:
           path: '.'
       - name: Create Firebase Config
         run: |
-          echo ${{ secrets.FIREBASE_APP_ID }} > config/firebaseConfig.js
+          echo ${{ secrets.FIREBASE_CONFIG }} > config/firebaseConfig.js
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
