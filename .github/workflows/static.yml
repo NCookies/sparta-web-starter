@@ -35,8 +35,8 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Create Firebase Config
         run: |
-          ls -al
           mkdir -p config  # 디렉터리 없으면 생성
+          ls -al
           echo `const firebaseConfig = {
             apiKey: '${{ secrets.FIREBASE_API_KEY }}',
             authDomain: '${{ secrets.FIREBASE_AUTH_DOMAIN }}',
@@ -46,6 +46,8 @@ jobs:
             appId: '${{ secrets.FIREBASE_APP_ID }}',
             measurementId: '${{ secrets.FIREBASE_MEASUREMENT_ID }}'
           };` > config/firebaseConfig.js
+          ls -al config
+          cat config/firebaseConfig.js
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
