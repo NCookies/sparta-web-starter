@@ -32,6 +32,8 @@ jobs:
         uses: actions/configure-pages@v4
       - name: Create Firebase Config
         run: |
+          mkdir -p config  # 디렉터리 없으면 생성
+          
           echo "const firebaseConfig = {
                 apiKey: '${{ secrets.FIREBASE_API_KEY }}',
                 authDomain: '${{ secrets.FIREBASE_AUTH_DOMAIN }}',
