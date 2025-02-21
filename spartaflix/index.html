@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
     
     <title>스파르타플릭스</title>
 
@@ -140,7 +140,7 @@
         }
 
         // 날씨 정보 가져오기
-        let url = "http://spartacodingclub.shop/sparta_api/weather/seoul";
+        let url = "https://cors-anywhere.herokuapp.com/http://spartacodingclub.shop/sparta_api/weather/seoul";
         fetch(url).then(res => res.json()).then(data => {
             let temp = data['temp'];
             $('#temperature').text(temp);
